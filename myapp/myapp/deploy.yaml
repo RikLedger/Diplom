@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: myapp
+  name: myapp
+  namespace: monitoring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      namespace: monitoring
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: 12sergey12/myapp:0.0.1
+        ports:
+          - containerPort: 80
+            name: http
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service
+  namespace: monitoring
+spec:
+  selector:
+    app: myapp
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      nodePort: 30080
+  type: NodePort

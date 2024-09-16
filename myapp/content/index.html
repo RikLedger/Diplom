@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru"> 
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1" />
+    <title>I’m DevOps Engineer! BaranovSA</title>
+</head>
+
+<body>
+    <h1>I’m DevOps Engineer! BaranovSA </h1>
+    <p>v: <span id="imageVersion">v0.0.7<span></p>
+
+
+   <script>
+       fetch('/image-version.txt')
+           .then(response => response.text())
+           .then(data => {
+               document.getElementById('imageVersion').innerText = data.trim();
+           });
+   <script>
+</body> 
+</html> 
